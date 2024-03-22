@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Parallax Image Hover Effect</title>
+  <style>
+    body {
+      margin: 0;
+    background-color: blueviolet;
+    }
+
+    .parallax-container {
+      width: 100vw;
+      height: 100vh;
+      perspective: 1000px;
+  
+    }
+
+    .parallax-image {
+      width: 500px; 
+      height: 500px; 
+      background: url('imgs/Holographic_Text_Effexct.png') center/cover no-repeat;
+      transform-style: preserve-3d;
+      transform-origin: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotateY(0deg) rotateX(0deg);
+      transition: transform 0.01s ;
+    }
+  </style>
+</head>
+<body>
+  <div class="parallax-container">
+    <div class="parallax-image" id="parallaxImage"></div>
+  </div>
+
+  <script>
+    const parallaxContainer = document.querySelector('.parallax-container');
+    const parallaxImage = document.getElementById('parallaxImage');
+
+    parallaxContainer.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.1) * 40;
+      const y = (e.clientY / window.innerHeight - 0.1) * 40;
+
+      parallaxImage.style.transform = `translate(-50%, -50%) rotateY(${x}deg) rotateX(${-y}deg)`;
+    });
+
+    parallaxContainer.addEventListener('mouseleave', () => {
+      parallaxImage.style.transform = `translate(-50%, -50%) rotateY(0deg) rotateX(0deg)`;
+    });
+  </script>
+</body>
+</html>
